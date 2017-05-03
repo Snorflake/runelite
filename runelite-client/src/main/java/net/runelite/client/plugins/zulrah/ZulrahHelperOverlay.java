@@ -119,51 +119,54 @@ public class ZulrahHelperOverlay extends Overlay{
 
                     for(List<StageData> list : patterns)
                     {
-                        if(currentStage == 0)
-                        {
-                            for (List<StageData> list2: patterns) // I don't really understand what is going on here.
+                        //No stage assigned yet
+                        if(currentStage == 0) {
+                            for(List<StageData> list2 : patterns)
                             {
                                 StageData tempStageData = list2.get(currentStage);
-                                if(list.get(currentStage).id != tempStageData.id)
-                                {
-
+                                if(list.get(currentStage).id != tempStageData.id) {
                                     currentStage = 1;
                                     break;
                                 }
                             }
                         }
-                        if(list.get(currentStage).id == npcId) {
+                        //Stage matches up and shit
+                        if(list.get(currentStage).id == npcId)
+                        {
+                            //DEBUG
+                            System.out.printf("Added pattern: %d Current stage: %d\n", patterns.indexOf(list), currentStage);
                             possiblePatterns.add(patterns.indexOf(list));
                         }
                     }
 
-                    if(possiblePatterns.size() == 1)
-                    {
-                        //Only one option
+                    if(possiblePatterns.size() == 1) {
+                        //There's only one possible, duh that must be it
                         currentPattern = possiblePatterns.get(0);
-                    } else if(possiblePatterns.size() > 1)
-                    {
+                        //DEBUG
+                        System.out.printf("Current pattern set to %d because size was only 1.", currentPattern);
+                    } else if(possiblePatterns.size() > 1) {
                         boolean same = true;
                         StageData firstStageData = patterns.get(possiblePatterns.get(0)).get(currentStage);
-                        for(int possiblePattern : possiblePatterns)
-                        {
+                        for(int possiblePattern : possiblePatterns) {
                             StageData tempStageData = patterns.get(possiblePatterns.get(possiblePattern)).get(currentStage);
-
-                            if(tempStageData.id != firstStageData.id)
-                            {
-                                same = false;
-                            }
+                            //DEBUG
+                            System.out.printf("temp: %d first: %d\n", tempStageData.id, firstStageData.id);
+                            if(tempStageData.id != firstStageData.id) same = false;
                         }
-                        if(same)
-                        {
+                        if (same) {
+                            //Could be possibility of 2, next decider is stage 4 so lets wait for that
+                            //DEBUG
+                            System.out.printf("Same = true, so we're waiting.\n");
                             drawIndicators(graphics, firstStageData);
                             if(currentStage != 0) {
                                 StageData stageData = patterns.get(possiblePatterns.get(0)).get(currentStage + 1);
-                                renderTileOverlay(graphics, stageData.safeSpot, new Color(144, 195, 212, 100));
+                                renderTileOverlay(graphics, getTile(stageData.safeSpot), new Color(144,195,212,100));
                             }
                         }
-                    } else if(possiblePatterns.size() == 0)
-                    {
+                    } else if(possiblePatterns.size() == 0) {
+                        //uh
+                        //DEBUG
+                        System.out.println("@@@@@ Possible patterns is 0");
                         currentStage++;
                     }
                 } else {
