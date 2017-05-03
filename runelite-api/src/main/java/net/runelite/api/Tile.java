@@ -54,6 +54,11 @@ public class Tile
 		return new DecorativeObject(client, decorativeObject);
 	}
 
+	public Point getLocation()
+	{
+		return new Point(tile.getX(), tile.getY());
+	}
+
 	public GameObject[] getGameObjects()
 	{
 		net.runelite.rs.api.GameObject[] objects = tile.getObjects();

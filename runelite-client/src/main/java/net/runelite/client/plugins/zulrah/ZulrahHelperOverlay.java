@@ -159,7 +159,7 @@ public class ZulrahHelperOverlay extends Overlay{
                             drawIndicators(graphics, firstStageData);
                             if(currentStage != 0) {
                                 StageData stageData = patterns.get(possiblePatterns.get(0)).get(currentStage + 1);
-                                //TODO: Draw tile overlay, Color(144, 195, 212, 100)
+                                renderTileOverlay(graphics, stageData.safeSpot, new Color(144, 195, 212, 100));
                             }
                         }
                     } else if(possiblePatterns.size() == 0)
@@ -203,12 +203,13 @@ public class ZulrahHelperOverlay extends Overlay{
                     drawIndicators(graphics, stageDatas.get(currentStage));
                     if (currentStage < stageDatas.size() - 1)
                     {
-                        //StageData stageData = stageDatas.get(currentStage + 1);
-                        //TODO: Draw tile overlay
-                        //TODO: Optionally draw "Next Magic/Ranged First" on the tile
+                        StageData stageData = stageDatas.get(currentStage + 1);
+                        renderTileOverlay(graphics, stageData.safeSpot, new Color(144, 195, 212, 100));
+                        //TODO: Optionally draw "Next Magic/Ranged First" on the tile for jad
                     } else {
-                        //StageData stageData = stageDatas.get(0);
-                        //TODO: Draw Tile Overlay
+                        StageData stageData = stageDatas.get(0);
+                        renderTileOverlay(graphics, stageData.safeSpot, new Color(144, 195, 212, 100));
+
                     }
 
                 }
@@ -226,9 +227,7 @@ public class ZulrahHelperOverlay extends Overlay{
     }
 
     private void drawIndicators(Graphics2D graphics, StageData stageData) {
-        Region region = client.getRegion();
-        //TODO: GetTile from point function
-//        renderTileOverlay(graphics, region.getTiles()[client.getPlane()][stageData.safeSpot.getX()][stageData.safeSpot.getY()], Color.RED);
+        renderTileOverlay(graphics, getTile(stageData.safeSpot), Color.RED);
 
         if(stageData.id == ID_MAGIC)
         {
@@ -279,16 +278,19 @@ public class ZulrahHelperOverlay extends Overlay{
         }
     }
 
-    private void renderTileOverlay(Graphics2D graphics, Tile tile, Color color) {
-        /*TileObject tileObject = null; //TODO
-        Polygon poly = tileObject.getCanvasTilePoly();
+    private Point getTile(Point worldPoint)
+    {
+        return Perspective.worldToLocal(client, worldPoint);
+    }
+    private void renderTileOverlay(Graphics2D graphics, Point tile, Color color) {
+        Polygon poly =  Perspective.getCanvasTilePoly(client, tile);
         if (poly != null) {
             graphics.setColor(color);
             graphics.setStroke(new BasicStroke(2));
             graphics.drawPolygon(poly);
             graphics.setColor(new Color(0, 0, 0, 50));
             graphics.fillPolygon(poly);
-        }*/
+        }
     }
     private class StageData
     {
