@@ -203,11 +203,11 @@ public class ZulrahHelperOverlay extends Overlay{
                     drawIndicators(graphics, stageDatas.get(currentStage));
                     if (currentStage < stageDatas.size() - 1)
                     {
-                        StageData stageData = stageDatas.get(currentStage + 1);
+                        //StageData stageData = stageDatas.get(currentStage + 1);
                         //TODO: Draw tile overlay
                         //TODO: Optionally draw "Next Magic/Ranged First" on the tile
                     } else {
-                        StageData stageData = stageDatas.get(0);
+                        //StageData stageData = stageDatas.get(0);
                         //TODO: Draw Tile Overlay
                     }
 
@@ -308,6 +308,6 @@ public class ZulrahHelperOverlay extends Overlay{
     {
         RANGEDFIRST,
         MAGICFIRST,
-        NOSWITCH;
+        NOSWITCH
     }
 }
