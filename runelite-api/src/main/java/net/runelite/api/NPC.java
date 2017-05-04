@@ -35,11 +35,6 @@ public class NPC extends Actor
 		this.npc = npc;
 	}
 
-	public int getId()
-	{
-		return npc.getComposition().getId();
-	}
-
 	@Override
 	public String getName()
 	{
