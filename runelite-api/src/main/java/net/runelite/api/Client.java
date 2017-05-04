@@ -62,19 +62,16 @@ public class Client
 			.toArray(size -> new Player[size]);
 	}
 
-	public int[] getBoostedSkillLevels()
+	public int getBoostedSkillLevel(Skill skill)
 	{
-		return client.getBoostedSkillLevels();
+		int[] boostedLevels = client.getBoostedSkillLevels();
+		return boostedLevels[skill.ordinal()];
 	}
 
-	public int[] getRealSkillLevels()
+	public int getRealSkillLevel(Skill skill)
 	{
-		return client.getRealSkillLevels();
-	}
-
-	public int[] getSkillExperiences()
-	{
-		return client.getSkillExperiences();
+		int[] realLevels = client.getRealSkillLevels();
+		return realLevels[skill.ordinal()];
 	}
 
 	public void sendGameMessage(String message)
@@ -312,5 +309,20 @@ public class Client
 	public XHashTable getComponentTable()
 	{
 		return new XHashTable(client.getComponentTable());
+	}
+
+	public int[] getSettings()
+	{
+		return client.getSettings();
+	}
+
+	public int[] getWidgetSettings()
+	{
+		return client.getWidgetSettings();
+	}
+
+	public boolean isPrayerActive(Prayer prayer)
+	{
+		return getSetting(prayer.getVarbit()) == 1;
 	}
 }
