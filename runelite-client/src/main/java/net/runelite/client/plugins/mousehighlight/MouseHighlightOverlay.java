@@ -87,6 +87,7 @@ class MouseHighlightOverlay extends Overlay
 			case "Walk here":
 			case "Cancel":
 			case "Continue":
+			case "Message":
 				return null;
 		}
 
