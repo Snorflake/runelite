@@ -36,6 +36,7 @@ import net.runelite.client.RuneLite;
 import net.runelite.client.plugins.account.AccountPlugin;
 import net.runelite.client.plugins.boosts.Boosts;
 import net.runelite.client.plugins.bosstimer.BossTimers;
+import net.runelite.client.plugins.cannon.CannonPlugin;
 import net.runelite.client.plugins.chatcommands.ChatCommands;
 import net.runelite.client.plugins.clanchat.ClanChat;
 import net.runelite.client.plugins.cluescrolls.ClueScrollPlugin;
@@ -113,6 +114,7 @@ public class PluginManager
 		plugins.add(new Timers());
 		plugins.add(new Runepouch());
 		plugins.add(new FightCave());
+		plugins.add(new CannonPlugin());
 
 		if (RuneLite.getOptions().has("developer-mode"))
 		{
